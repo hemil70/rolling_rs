@@ -429,4 +429,4 @@ def asset_comparison():
     return render_template('asset_comparison.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
