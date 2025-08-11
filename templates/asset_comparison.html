@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Asset Class Comparison</h1>
+<p>Compare the relative strength between Gold, S&P 500, and Nifty 50.</p>
+<form method="POST" action="/asset_comparison">
+    <div class="mb-3">
+        <label for="rs_lengths" class="form-label">RS Lengths (comma-separated, e.g., 21,55,123):</label>
+        <input type="text" class="form-control" id="rs_lengths" name="rs_lengths" value="21,55,123" data-bs-toggle="tooltip" title="Enter RS periods in days, separated by commas">
+    </div>
+    <button type="submit" class="btn btn-primary">Compare</button>
+</form>
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+</script>
+{% endblock %}

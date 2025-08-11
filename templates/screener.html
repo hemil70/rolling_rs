@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Stock Screener</h1>
+<p class="lead">Upload your stock list, choose your analysis, and get insights fast.</p>
+<form method="POST" action="/screener" enctype="multipart/form-data" id="analysisForm">
+    <div class="mb-3">
+        <label for="file" class="form-label">Upload Stock List (CSV or comma-separated):</label>
+        <input type="file" class="form-control" id="file" name="file" required data-bs-toggle="tooltip" title="Upload a file with stock tickers (e.g., AAPL, MSFT)">
+    </div>
+    <div class="mb-3">
+        <label for="index_symbol" class="form-label">Index Symbol (default: ^GSPC):</label>
+        <input type="text" class="form-control" id="index_symbol" name="index_symbol" value="^GSPC" data-bs-toggle="tooltip" title="Enter the index symbol (e.g., ^GSPC for S&P 500)">
+    </div>
+
+    <div class="mb-3">
+        <h3>Relative Strength (RS) Calculation</h3>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="daily" name="timeframes" value="daily">
+            <label class="form-check-label" for="daily">Daily RS</label>
+            <input type="text" class="form-control mt-2" name="daily_rs_lengths" placeholder="e.g., 55, 21">
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="weekly" name="timeframes" value="weekly">
+            <label class="form-check-label" for="weekly">Weekly RS</label>
+            <input type="text" class="form-control mt-2" name="weekly_rs_lengths" placeholder="e.g., 21">
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="monthly" name="timeframes" value="monthly">
+            <label class="form-check-label" for="monthly">Monthly RS</label>
+            <input type="text" class="form-control mt-2" name="monthly_rs_lengths" placeholder="e.g., 12">
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <h3>Dated Relative Performance</h3>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="calculate_outperformance" name="calculate_outperformance" value="yes">
+            <label class="form-check-label" for="calculate_outperformance">Calculate Outperformance</label>
+        </div>
+        <div class="mt-2">
+            <label for="reference_date" class="form-label">Reference Date (YYYY-MM-DD):</label>
+            <input type="date" class="form-control" id="reference_date" name="reference_date">
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Analyze</button>
+    <div id="spinner" class="spinner-border text-light mt-3" style="display: none;"></div>
+</form>
+
+<script>
+    document.getElementById('analysisForm').addEventListener('submit', function() {
+        document.getElementById('spinner').style.display = 'block';
+    });
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+</script>
+{% endblock %}

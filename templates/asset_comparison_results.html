@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Asset Class Comparison Results</h1>
+{% if skipped_lengths %}
+    <p class="text-warning">Not enough data for RS lengths: {{ skipped_lengths | join(', ') }}</p>
+{% endif %}
+<h2>Summary of Rankings</h2>
+<div class="table-responsive">
+    {{ summary | safe }}
+</div>
+<h2>Relative Strength Charts</h2>
+{% for chart in charts %}
+    <h3>{{ chart.rs_length }}-day RS</h3>
+    {{ chart.chart | safe }}
+{% endfor %}
+<p>Use these results to screen stocks in the strongest index via the screener. Suggested index symbols: Gold (GLD), S&P 500 (^GSPC), Nifty 50 (^NSEI).</p>
+<a href="/screener" class="btn btn-secondary mt-3">Go to Stock Screener</a>
+{% endblock %}
