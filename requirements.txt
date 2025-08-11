@@ -1,0 +1,6 @@
+Flask==3.0.3
+pandas==2.2.2
+yfinance==0.2.43
+plotly==5.23.0
+flask-caching==2.3.0
+gunicorn==23.0.0
